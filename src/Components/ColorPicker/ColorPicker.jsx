@@ -4,13 +4,23 @@ import { SketchPicker } from 'react-color';
 import { enableTouchAction } from '../../Actions/Actions';
 import { Row, Col } from 'reactstrap';
 import { connect } from 'react-redux';
+import { colorChips } from '../../Utils/Utils';
 
 class ColorPicker extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      displayColorPicker: [false,false,false,false,false,false,false,false,false,false]
+      displayColorPicker: [false,false,false,false,false,false,false,false,false,false],
+      indexMinChip: 0
     };
+  }
+
+  componentDidMount() {
+    for(let y = 0 ; y < colorChips.length ; y++){
+      if(colorChips[y].value === this.props.minChip){
+        this.setState({ indexMinChip: y });
+      }
+    }
   }
 
   handleClickPicker = (index) => {
@@ -41,8 +51,8 @@ class ColorPicker extends Component {
             {this.props.colors.map((color, index) => {
               return(
               <Col key={index} xs={2} sm={2} md={2} lg={2} id={`positionColorPicker${index}`}>
-                <div className="swatch" id={`positionColorPickerOne${index}`}>
-                  <div className="color" style={{background: color.colorOne}} onClick={ () => {this.handleClickPicker(index + index)} }></div>
+                <div className="swatch"  id={`positionColorPickerOne${index}`}>
+                  <div className="color" style={color.colorOne ? {background: color.colorOne} : { background: colorChips[index + this.state.indexMinChip].colorOne}} onClick={ () => {this.handleClickPicker(index + index)} }></div>
                 </div>
                 {this.state.displayColorPicker[index+index] ?
                 <div className="popover">
@@ -51,7 +61,7 @@ class ColorPicker extends Component {
                 </div>
                 : null}
                 <div className="swatch" id={`positionColorPickerTwo${index}`}>
-                  <div className="color" style={{background: color.colorTwo}} onClick={ () => {this.handleClickPicker(2 * index + 1)} }></div>
+                  <div className="color" style={color.colorOne ? {background: color.colorTwo} : { background: colorChips[index + this.state.indexMinChip].colorTwo}} onClick={ () => {this.handleClickPicker(2 * index + 1)} }></div>
                 </div>
                 {this.state.displayColorPicker[2 * index + 1] ?
                 <div className="popover">
@@ -69,7 +79,7 @@ class ColorPicker extends Component {
               return(
               <Col className="px-0" key={index} xs={2} sm={2} md={2} lg={2}>
                 <div className="swatch">
-                  <div className="color" style={{background: color.colorOne}} onClick={ () => {this.handleClickPicker(index + index)} }></div>
+                  <div className="color" style={color.colorOne ? {background: color.colorOne} : { background: colorChips[index + this.state.indexMinChip].colorOne}} onClick={ () => {this.handleClickPicker(index + index)} }></div>
                 </div>
                 {this.state.displayColorPicker[index + index] ?
                 <div className={`popoverOne${index}`}>
@@ -78,7 +88,7 @@ class ColorPicker extends Component {
                 </div>
                 : null}
                 <div className="swatch">
-                  <div className="color" style={{background: color.colorTwo}} onClick={ () => {this.handleClickPicker(2 * index + 1)} }></div>
+                  <div className="color" style={color.colorOne ? {background: color.colorTwo} : { background: colorChips[index + this.state.indexMinChip].colorTwo}} onClick={ () => {this.handleClickPicker(2 * index + 1)} }></div>
                 </div>
                 {this.state.displayColorPicker[2 * index + 1] ?
                 <div className={`popoverTwo${index}`}>
@@ -103,4 +113,8 @@ const mapActionsToProps = {
   enableSidebarTouch : enableTouchAction,
 }
 
-export default connect(null, mapActionsToProps)(ColorPicker);
+const mapStateToProps = store => ({
+  minChip: store.settings.minChip
+})
+
+export default connect(mapStateToProps, mapActionsToProps)(ColorPicker);

@@ -136,7 +136,7 @@ import { changePickerColorAction } from '../../Actions/Actions';
 
     generateValue = (ctx, positionX, positionY, value) => {
       ctx.font = "15px Arial";
-      ctx.fillStyle = "#000";
+      ctx.fillStyle = "#fff";
       ctx.textAlign = "center";
       if(Number(value) >= 1000){
         value = (Number(value/1000)).toString() + "K";
