@@ -59,6 +59,13 @@ class Parameters extends Component {
   componentDidMount() {
     this.props.handleGeneratePossibleStacks(this.props.minChip);
     this.props.handleGenerateChipset(this.props.startingStack, this.props.minChip);
+    this.setState({ 
+      maxRebuys: Math.floor(this.props.maxPlayers * 1.25),
+      maxAddons: Math.floor(this.props.maxPlayers * 0.75),
+      addonsChips: Math.floor(this.props.startingStack * 1.5),
+    }, () => {
+      this.props.setExtraRules(this.state.maxRebuys, this.state.addonsChips, this.state.maxAddons);
+    });
   }
 
   totalChipset = (props) => {
@@ -203,7 +210,7 @@ class Parameters extends Component {
           </Col>
         </Row>
         <Row className="mt-4 d-flex justify-content-end">
-          <Col md={6}>
+          <Col xs={6} md={6}>
             {this.state.checkedRecave ?
               <Label for="extra-rules" className="extra-rules">
                 Rebuys
@@ -215,7 +222,7 @@ class Parameters extends Component {
           </Col>
         </Row>
         <Row className="mt-4 d-flex justify-content-end">
-          <Col md={6}>
+          <Col xs={6} md={6}>
             <Label htmlFor="recave-button">
               <Switch
                 checked={this.state.checkedRecave}
@@ -236,7 +243,7 @@ class Parameters extends Component {
           </Col>
         </Row>
         <Row className="mt-3">
-          <Col md={6}>
+          <Col xs={6} md={6}>
             <FormGroup className="mb-0">
               <Label for="maxPlayers" className="selection">1. Max Players</Label>
               <Input
@@ -279,7 +286,7 @@ class Parameters extends Component {
               </DropdownMenu>
             </Dropdown>
           </Col>
-          <Col md={6} id="disabled">
+          <Col xs={6} md={6} id="disabled">
             <FormGroup className="mb-0">
               <Label for="maxRebuys" className="selection">4. Max Rebuys</Label>
               <Input 
@@ -371,13 +378,13 @@ class Parameters extends Component {
           </tbody>
         </Table>
         <Row className="mt-3">
-          <Col md={4}>
+          <Col xs={4} md={4}>
             <Button size="sm" className="quantity-btn" onClick={this.props.handleClickLessChips}>Less Chips</Button>
           </Col>
-          <Col md={4}>
+          <Col xs={4} md={4}>
             <h5 className="totalChips">TOTAL CHIPS : {this.totalChipset(this.props)}</h5>
           </Col>
-          <Col md={4}>
+          <Col xs={4} md={4}>
             <Button size="sm" className="quantity-btn" onClick={this.props.handleClickMoreChips}>More Chips</Button>
           </Col>
         </Row>

@@ -45,26 +45,25 @@ export const initStackDistribution = (startingStack, minChip, state, removeUnuse
   removeUnusedChips(chipValues, minChip);
   let remainingChips = startingStack;
   let chipIndex = 0;
-  while(remainingChips > 0 && chipIndex < chipCounts.length - 2){
-    let chipRatio = chipValues[chipIndex + 1]/chipValues[chipIndex];
+  while(remainingChips>0 && chipIndex < chipCounts.length-2){
+    let chipRatio = chipValues[chipIndex+1]/chipValues[chipIndex];
     let chipMultiplier = Math.floor(10/chipRatio);
-    let currentValue = chipMultiplier * chipValues[chipIndex + 1] - totalStack(chipValues, chipCounts);
-    if(currentValue > remainingChips){
+    let currentValue = chipMultiplier*chipValues[chipIndex+1]-totalStack(chipValues,chipCounts);
+    if(currentValue>remainingChips)
       currentValue = remainingChips;
-    }
     chipCounts[chipIndex] = Math.floor(currentValue/chipValues[chipIndex]);
-    remainingChips = startingStack - totalStack(chipValues, chipCounts);
+    remainingChips = startingStack-totalStack(chipValues,chipCounts);
     chipIndex++;
   }
-  chipIndex = chipCounts.length - 1;
-  while(remainingChips > 0 && chipIndex >= 0)
+  chipIndex = chipCounts.length-1
+  while(remainingChips>0 && chipIndex >=0){
     chipCounts[chipIndex] += Math.floor(remainingChips/chipValues[chipIndex]);
-    remainingChips = startingStack - totalStack(chipValues, chipCounts);
+    remainingChips = startingStack-totalStack(chipValues,chipCounts);
     chipIndex--;
-  
+  }
   state = setStateChips(chipValues, chipCounts, state);
   return state ;
-}
+ }
 
 export const colorChips = [{
     value: 1,

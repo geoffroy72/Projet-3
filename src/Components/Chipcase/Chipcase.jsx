@@ -242,7 +242,6 @@ class Chipcase extends Component {
     this.props.handleChangeColorDataPicker();
   }
 
-
   setRatioColumn = (props, addons, chipValues) => {
     let chipCounts = [];
     if(addons === 0){
