@@ -59,6 +59,11 @@
 .dropdown-menu {
   min-width: 5em !important;
   border-radius: 0 !important;
+  background-color: #1c222e !important;
+}
+
+.dropdown-item{
+  color: #f87515 !important;
 }
 
 .table-dark {

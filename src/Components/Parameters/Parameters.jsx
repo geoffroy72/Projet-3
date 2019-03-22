@@ -262,9 +262,9 @@ class Parameters extends Component {
               <DropdownToggle caret className="parameters-inputs">
                 {this.props.minChip}
               </DropdownToggle>
-              <DropdownMenu>
+              <DropdownMenu className="value-input">
                 {this.state.minChipOptions.map((chip, index) => {
-                  return <DropdownItem key={index} value={chip} onClick={this.handleGenerateStacks}>{chip}</DropdownItem>
+                  return <DropdownItem  key={index} value={chip} onClick={this.handleGenerateStacks}>{chip}</DropdownItem>
                 })}
               </DropdownMenu>
             </Dropdown>
@@ -273,7 +273,7 @@ class Parameters extends Component {
               <DropdownToggle caret className="parameters-inputs">
                 {this.props.startingStack}
               </DropdownToggle>
-              <DropdownMenu modifiers={{ setMaxHeight: { enabled: true, order: 890,
+              <DropdownMenu className="value-input" modifiers={{ setMaxHeight: { enabled: true, order: 890,
                 fn: (data) => {
                   return {...data, styles: {...data.styles, overflow: 'auto', maxHeight: 100, },
                       };
