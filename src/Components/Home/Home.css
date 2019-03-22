@@ -1,0 +1,30 @@
+.btn-start{
+  background-color: #303f5c!important;
+  border-style: solid !important;
+  border-color: #303f5c;
+  letter-spacing: 1px;
+  color: #ef6c00;
+  padding: 20px;
+  font-weight: bold;
+  box-shadow: 2px 2px 2px 2px white;
+}
+
+.home-page{
+  color: #ef6c00;
+  font-family: 'Cantarell', sans-serif;
+  height: 100vh !important;
+}
+.image-background{
+  min-height: 100%;
+  min-width: 100%;
+  width: 100%;
+  height: auto;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  opacity: 0.6;
+}
+.text-home{
+  font-size: 2em;
+}
