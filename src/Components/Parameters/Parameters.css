@@ -62,8 +62,13 @@
   background-color: #1c222e !important;
 }
 
-.dropdown-item{
+.dropdown-item {
   color: #f87515 !important;
+}
+
+.dropdown-item:hover {
+  background-color: #f87515;
+  color: #1c222e !important;
 }
 
 .table-dark {
